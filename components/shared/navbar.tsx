@@ -8,6 +8,7 @@ import { HelpCircle, Settings } from "lucide-react";
 import { ModeToggle } from './mode-toggle';
 import UserBox from './user-box';
 import { Avatar, AvatarFallback } from '../ui/avatar';
+import { SignInButton } from '@clerk/nextjs';
 
 
 const Navbar = () => {
@@ -37,9 +38,7 @@ const Navbar = () => {
                     {userId ? (
                         <UserBox />
                     ) : (
-                        <Avatar className="cursor-pointer">
-                            <AvatarFallback>SB</AvatarFallback>
-                        </Avatar>
+                                <SignInButton>Sign In</SignInButton>
                     )}
                 </div>
             </div>
