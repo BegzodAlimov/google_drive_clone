@@ -21,15 +21,18 @@ const SubscriptionProvider = ({ children }: ChildProps) => {
             );
             setSubscription(data);
             let files: any[] = [];
-            const q = query(
-                collection(db, "files"),
-                where("uid", "==", user?.id),
-                where("isArchive", "==", false)
-            );
-            const querySnapshot = await getDocs(q);
-            querySnapshot.forEach((doc) => {
-                files.push({ ...doc.data(), id: doc.id });
-            });
+            if (user?.id) {
+                const q = query(
+                    collection(db, "files"),
+                    where("uid", "==", user?.id),
+                    where("isArchive", "==", false)
+                );
+                const querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    files.push({ ...doc.data(), id: doc.id });
+                });  
+            }
+
             const totalSize = files.reduce((acc, file) => acc + file.size, 0);
             setTotalStorage(totalSize);
             setIsLoading(false);
